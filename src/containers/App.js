@@ -37,7 +37,7 @@ class App extends Component {
       this.props.authenticate(token)
     } else {
       // Ping the API server in case it hasn't been used in 30 minutes and Heroku put it to sleep
-      fetch('https://gentle-chamber-30614.herokuapp.com/api/v1/users')
+      fetch('https://gentle-chamber-30614.herokuapp.com/api/v1')
     }
   }
 
