@@ -33,6 +33,7 @@ export default {
     const headers =  {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin':'*',
       'Authorization': `Bearer: ${token}`
     }
 
