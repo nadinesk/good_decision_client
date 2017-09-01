@@ -29,7 +29,7 @@ export default {
 
   post(url, data ={}, token) {
     const body = JSON.stringify(data)
-
+    debugger
     const headers =  {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

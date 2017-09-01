@@ -4,10 +4,10 @@ import { Field, reduxForm } from 'redux-form'
 const validate = values => {
   const errors = {};
 
-  if (!values.username) {
-    errors.username = 'Username is required';
-  } else if (values.username.length < 2) {
-    errors.username = 'Username must be a minimum of 2 characters';
+  if (!values.email) {
+    errors.email = 'Email is required';
+  } else if (values.email.length < 2) {
+    errors.email = 'Email must be a minimum of 2 characters';
   }
   if (!values.password) {
     errors.password = 'Password is required';
@@ -24,9 +24,9 @@ class UserForm extends Component {
     super(props)
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
-      name: "",
+      username: "",
       usernameErrors: {},
       passwordErrors: {}
     }
@@ -35,9 +35,9 @@ class UserForm extends Component {
   handleSubmit = data => this.props.onSubmit(data)
 
   handleChange(event) {
-    if (event.target.name === 'username') {
+    if (event.target.name === 'email') {
       this.setState({
-        usernameErrors: validate({username: event.target.value}),
+        usernameErrors: validate({email: event.target.value}),
         username: event.target.value
       })
     } else if (event.target.name === 'password') {
@@ -54,17 +54,17 @@ class UserForm extends Component {
     let NameField;
     if (this.props.action === 'signup') {
       NameField = <div>
-        <label className="uk-form-label" htmlFor="name">Name (optional)</label>
+        <label className="uk-form-label" htmlFor="username">Username (optional)</label>
         <div className="uk-form-controls">
             <Field
-              name="name"
-              value={this.state.name}
+              name="username"
+              value={this.state.username}
               onChange={this.handleChange.bind(this)}
               className="uk-input uk-width-medium"
               component="input"
-              id="name"
+              id="username"
               type="text"
-              placeholder="Name"
+              placeholder="Username"
             /><br /><br />
           </div>
         </div>
@@ -74,19 +74,19 @@ class UserForm extends Component {
         {errors.length > 0 ? <ul className="uk-alert-danger">{renderedErrorsLi}</ul> : null}
         <div className="uk-margin">
           {NameField}
-          <label className="uk-form-label" htmlFor="username">Username*</label>
+          <label className="uk-form-label" htmlFor="email">Email*</label>
           <div className="uk-form-controls">
               <Field
-                name="username"
-                value={this.state.username}
+                name="email"
+                value={this.state.email}
                 onChange={this.handleChange.bind(this)}
                 className="uk-input uk-width-medium"
                 component="input"
-                id="username"
+                id="email"
                 type="text"
-                placeholder="Username"
+                placeholder="Email"
               /><br />
-            {!!this.state.usernameErrors.username ? <small className="uk-alert-danger">{this.state.usernameErrors.username}</small> : <small><font color="white">.</font></small>}
+            {!!this.state.usernameErrors.email ? <small className="uk-alert-danger">{this.state.usernameErrors.username}</small> : <small><font color="white">.</font></small>}
           </div>
           <label className="uk-form-label" htmlFor="password">Password*</label>
           <div className="uk-form-controls">
