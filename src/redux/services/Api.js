@@ -40,7 +40,8 @@ export default {
     return fetch(`${BASE_URL}${url}`, {
       method: 'POST',
       headers: headers,
-      body: body      
+      body: body
+      
     })
     .then(parseResponse)
 
@@ -52,6 +53,7 @@ export default {
     const headers =  {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+
       'Authorization': `Bearer: ${token}`
     }
 
