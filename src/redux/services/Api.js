@@ -18,7 +18,8 @@ export default {
   get(url) {
     const headers =  {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*'
     }
     return fetch(`${BASE_URL}${url}`, {
       method: 'GET',
@@ -33,6 +34,7 @@ export default {
     const headers =  {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin':'*',
       'Authorization': `Bearer: ${token}`
     }
 
@@ -52,7 +54,7 @@ export default {
     const headers =  {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-
+            'Access-Control-Allow-Origin':'*',
       'Authorization': `Bearer: ${token}`
     }
 
@@ -68,6 +70,7 @@ export default {
     const headers =  {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*',
       'Authorization': `Bearer: ${token}`
     }
     return fetch(`${BASE_URL}${url}`, {
