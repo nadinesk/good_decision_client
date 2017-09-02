@@ -11,12 +11,12 @@ import { logout } from '../redux/modules/Auth/actions'
 import fetch from 'isomorphic-fetch'
 
 // views
-//import Welcome from '../views/Welcome'
+import Welcome from '../views/Welcome'
 import Signup from '../views/Signup'
 import Login from '../views/Login'
-//import NotFound from '../views/NotFound'
-// import Dashboard from '../views/Dashboard'
-// import Navbar from '../views/Navbar'
+import NotFound from '../views/NotFound'
+import Dashboard from '../views/Dashboard'
+import Navbar from '../views/Navbar'
 
 // custom made components
 import { authenticate, authFailure } from '../redux/modules/Auth/actions'
@@ -46,14 +46,30 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          
+          <Navbar isAuthenticated={this.props.isAuthenticated} logout={this.props.logout} currentUser={this.props.currentUser.name || this.props.currentUser.username}/>
           <Switch>
+          <Route exact path="/" render={() => (
+              this.props.isAuthenticated ? (
+                <Redirect to="/dashboard"/>
+              ) : (
+                <Welcome />
+              )
+            )}/>
            
             <Route exact path="/signup" component={Signup} isAuthenticated={this.props.isAuthenticated} />
             <Route exact path="/login" component={Login} />
-
+            <Route exact path="/dashboard" render={() => (
+              this.props.isAuthenticated ? (
+                <Dashboard />
+              ) : (
+                <Redirect to="/"/>
+              )
+            )}/>
+            <Route component={NotFound} />
           </Switch>
         </div>
+
+          
       </Router>
     );
   }
