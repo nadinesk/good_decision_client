@@ -5,6 +5,7 @@ const validate = values => {
   const errors = {};
 
   if (!values.email) {
+    
     errors.email = 'Email is required';
   } else if (values.email.length < 2) {
     errors.email = 'Email must be a minimum of 2 characters';
@@ -27,7 +28,7 @@ class UserForm extends Component {
       email: "",
       password: "",
       username: "",
-      usernameErrors: {},
+      emailErrors: {},
       passwordErrors: {}
     }
   }
@@ -37,8 +38,8 @@ class UserForm extends Component {
   handleChange(event) {
     if (event.target.name === 'email') {
       this.setState({
-        usernameErrors: validate({email: event.target.value}),
-        username: event.target.value
+        emailErrors: validate({email: event.target.value}),
+        email: event.target.value
       })
     } else if (event.target.name === 'password') {
       this.setState({
@@ -50,17 +51,17 @@ class UserForm extends Component {
 
   render() {
     const {handleSubmit, errors} = this.props
-    const renderedErrorsLi = errors.map((error, i) => <li key={i}>{error}</li>)
+    const renderedErrorsLi = errors
     let NameField;
     if (this.props.action === 'signup') {
       NameField = <div>
-        <label className="uk-form-label" htmlFor="username">Username (optional)</label>
-        <div className="uk-form-controls">
+        <label htmlFor="username">Username (optional)</label>
+        <div >
             <Field
               name="username"
               value={this.state.username}
               onChange={this.handleChange.bind(this)}
-              className="uk-input uk-width-medium"
+             
               component="input"
               id="username"
               type="text"
@@ -70,8 +71,10 @@ class UserForm extends Component {
         </div>
     }
     return (
+      
       <form className="uk-form-stacked" onSubmit={handleSubmit(this.handleSubmit)}>
-        {errors.length > 0 ? <ul className="uk-alert-danger">{renderedErrorsLi}</ul> : null}
+
+        {errors? <ul className="uk-alert-danger">{renderedErrorsLi}</ul> : null }
         <div className="uk-margin">
           {NameField}
           <label className="uk-form-label" htmlFor="email">Email*</label>
@@ -86,7 +89,7 @@ class UserForm extends Component {
                 type="text"
                 placeholder="Email"
               /><br />
-            {!!this.state.usernameErrors.email ? <small className="uk-alert-danger">{this.state.usernameErrors.username}</small> : <small><font color="white">.</font></small>}
+            {!!this.state.emailErrors.email ? <small className="uk-alert-danger">{this.state.emailErrors.username}</small> : <small><font color="white">.</font></small>}
           </div>
           <label className="uk-form-label" htmlFor="password">Password*</label>
           <div className="uk-form-controls">
