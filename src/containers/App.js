@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-//import { logout } from '../redux/modules/Auth/actions'
+import { logout } from '../redux/modules/Auth/actions'
 import fetch from 'isomorphic-fetch'
 
 // views
 //import Welcome from '../views/Welcome'
 import Signup from '../views/Signup'
-// import Login from '../views/Login'
-// import NotFound from '../views/NotFound'
+import Login from '../views/Login'
+//import NotFound from '../views/NotFound'
 // import Dashboard from '../views/Dashboard'
 // import Navbar from '../views/Navbar'
 
@@ -22,7 +23,7 @@ import { authenticate, authFailure } from '../redux/modules/Auth/actions'
 
 type Props = {
   isAuthenticated: boolean,
-  //logout: () => void,
+  logout: () => void,
   authenticate: () => void,
   authFailure: () => void
 }
@@ -49,7 +50,8 @@ class App extends Component {
           <Switch>
            
             <Route exact path="/signup" component={Signup} isAuthenticated={this.props.isAuthenticated} />
-           
+            <Route exact path="/login" component={Login} />
+
           </Switch>
         </div>
       </Router>
@@ -66,7 +68,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    //logout,
+    logout,
     authenticate,
     authFailure
   }, dispatch)
