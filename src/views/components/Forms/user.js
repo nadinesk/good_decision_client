@@ -74,7 +74,7 @@ class UserForm extends Component {
       
       <form className="uk-form-stacked" onSubmit={handleSubmit(this.handleSubmit)}>
 
-        {errors? <ul className="uk-alert-danger">{renderedErrorsLi}</ul> : null }
+        {errors ? <ul className="uk-alert-danger">{renderedErrorsLi}</ul> : null }
         <div className="uk-margin">
           {NameField}
           <label className="uk-form-label" htmlFor="email">Email*</label>

@@ -6,8 +6,14 @@ const parseResponse = (response) => {
   return response.json()
     .then(json => {
       if (!response.ok) {
-        return Promise.reject(json.errors)
+        if(json.errors['email']){
+          return Promise.reject(json.errors['email'])
+        } else {
+          return Promise.reject(json.errors['password'])
+        }
+          
       }
+
 
       return json
     })

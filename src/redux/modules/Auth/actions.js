@@ -17,13 +17,12 @@ const authSuccess = (user, token) => {
   }
 }
 
-export const authFailure = (errors) => {
+export const authFailure = (errors) => {  
   return {
     type: 'AUTHENTICATION_FAILURE',
     errors: errors
   }
 }
-
 
 // async functions
 
@@ -38,10 +37,9 @@ export const signup = (user, router) => {
         dispatch(reset('signup'))
         router.history.replace('/dashboard')
       })
-      .catch((errors) => {
-        console.log(errors)
+      .catch(errors => {        
         dispatch(authFailure(errors))
-        throw new SubmissionError(errors)
+        throw new SubmissionError({errors: 'Bad login'})
       })
   }
 }
@@ -58,9 +56,9 @@ export const login = (user, router) => {
         router.history.replace('/dashboard');
       })
       .catch((errors) => {
-        console.log(errors)
+        
         dispatch(authFailure(errors))
-        throw new SubmissionError(errors)
+        throw new SubmissionError({errors: 'Bad login'})
       })
   }
 }
